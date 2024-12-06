@@ -1,0 +1,24 @@
+name: Example Workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  clone:
+    name: Clone Repository
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run Command with Metrics
+        uses: ./.github/actions/command-metrics
+        id: command-run
+        with:
+          command: 'echo "Hello, World!" && sleep 2'
+      
+      - name: Display Metrics
+        run: |
+          echo "Output: ${{ steps.command-run.outputs.output }}"
+          echo "Stdout: ${{ steps.command-run.outputs.stdout }}"
+          echo "Stderr: ${{ steps.command-run.outputs.stderr }}"
+          echo "Exit Code: ${{ steps.command-run.outputs.exit-code }}"
+          echo "Duration: ${{ steps.command-run.outputs.duration }} seconds"
