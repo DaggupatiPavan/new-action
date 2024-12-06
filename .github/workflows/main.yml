@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Run Command with Metrics
-        uses: ./.github/actions/command-metrics
+        uses: DaggupatiPavan/new-action@v1
         id: command-run
         with:
           command: 'echo "Hello, World!" && sleep 2'
